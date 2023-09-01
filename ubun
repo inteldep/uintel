@@ -32,3 +32,4 @@ RUN chmod +x /usr/local/bin/start-vnc.sh
 
 # 暴露 VNC 和 TinyProxy 的端口
 EXPOSE 8900 5901 9898 
+CMD  /start-vnc.sh
