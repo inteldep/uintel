@@ -19,22 +19,19 @@ RUN mkdir ~/.vnc
 RUN echo "Dreamsky124" | vncpasswd -f > ~/.vnc/passwd
 RUN chmod 600 ~/.vnc/passwd
 
-RUN echo 'whoami ' >>/Dreamsky124.sh 
-RUN echo 'cd ' >>/Dreamsky124.sh
-
 # 创建一个启动脚本
-RUN echo "#!/bin/bash" >> /Dreamsky124.sh
-RUN echo "rm -rf /tmp/.X1-lock /tmp/.X11-unix" >> /Dreamsky124.sh
-RUN echo "tightvncserver :1 -geometry 1440x900 -depth 24" >> /Dreamsky124.sh
-RUN echo "tail -f /root/.vnc/*.log &" >> /Dreamsky124.sh
-RUN echo "tinyproxy -d" >> /Dreamsky124.sh
-RUN echo "export DISPLAY=:1" >> /Dreamsky124.sh
-RUN echo "xfce4-session &" >> /Dreamsky124.sh
-RUN echo "sleep infinity" >> /Dreamsky124.sh
-RUN chmod +x /Dreamsky124.sh
+RUN echo "#!/bin/bash" >> /usr/local/bin/start-vnc.sh
+RUN echo "rm -rf /tmp/.X1-lock /tmp/.X11-unix" >> /usr/local/bin/start-vnc.sh
+RUN echo "tightvncserver :1 -geometry 1440x900 -depth 24" >> /usr/local/bin/start-vnc.sh
+RUN echo "tail -f /root/.vnc/*.log &" >> /usr/local/bin/start-vnc.sh
+RUN echo "tinyproxy -d" >> /usr/local/bin/start-vnc.sh
+RUN echo "export DISPLAY=:1" >> /usr/local/bin/start-vnc.sh
+RUN echo "xfce4-session &" >> /usr/local/bin/start-vnc.sh
+RUN echo "sleep infinity" >> /usr/local/bin/start-vnc.sh
+RUN chmod +x /usr/local/bin/start-vnc.sh
 
 # 暴露 VNC 和 TinyProxy 的端口
 EXPOSE 8900 5901 9898
 
 # 设置默认的启动命令
-CMD /Dreamsky124.sh
+CMD ["/usr/local/bin/start-vnc.sh"]
