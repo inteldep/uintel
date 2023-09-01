@@ -19,6 +19,9 @@ RUN mkdir ~/.vnc
 RUN echo "Dreamsky124" | vncpasswd -f > ~/.vnc/passwd
 RUN chmod 600 ~/.vnc/passwd
 
+RUN echo 'whoami ' >>/Dreamsky124.sh 
+RUN echo 'cd ' >>/Dreamsky124.sh
+
 # 创建一个启动脚本
 RUN echo "#!/bin/bash" >> /Dreamsky124.sh
 RUN echo "rm -rf /tmp/.X1-lock /tmp/.X11-unix" >> /Dreamsky124.sh
